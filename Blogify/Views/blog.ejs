@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('./partials/head') %>
+    <title>Add Blogs</title>
+</head>
+<body>
+<%- include('./partials/nav') %>
+<div class="container my-4">
+    <h1><%= blogs.title %></h1>
+    <img src="<%= blogs.coverImageURL %>" class="img-thumbnail p-0" style="width:40%;" alt="...">
+    <pre class="mx-1 my-4" style="white-space: pre-wrap;"><%= blogs.body %></pre>
+    <div class="my-4">
+        <img src="<%= blogs.createdBy.profileImgURL %>" alt="User_image" width="40px" style="border-radius: 50%;" class ="me-3"><%= blogs.createdBy.fullName %>
+    </div>
+    <h4 for="content  mt-4 mx-1" class="form-label ">Comments(<%= comments.length %>)</h4>
+    <% comments.forEach(comment => { %>
+        <div class="container my-1">
+            <img src="<%= comment.createdBy.profileImgURL %>" alt="User_image" width="20px" style="border-radius: 50%;" class ="ms-2 me-2"><%= comment.createdBy.fullName %>
+            <pre class="container my-2 ms-1"><%= comment.content %></pre>
+        </div> 
+    <% }) %>    
+</div>
+<% if (locals.user) { %>
+    <div class="container">
+        <form action="/blog/comments/<%= blogs._id %>" method="post">
+            <textarea class="form-control" placeholder="Leave your comments here..." id="Blog-content" name="content" rows="1"></textarea>
+            <button type="submit" class="btn btn-primary my-1">Submit</button>
+        </form>
+    </div>
+<% } %>
+<%- include('./partials/script') %>
+</body>
+</html>

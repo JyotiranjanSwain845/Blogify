@@ -1,0 +1,3 @@
+Hello...
+A read me file for BLOGIFY .
+Trial no : 1
